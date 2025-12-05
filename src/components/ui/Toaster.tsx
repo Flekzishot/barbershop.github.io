@@ -11,7 +11,11 @@ export function Toaster() {
 
   if (!message) return null
   return (
-    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-brand-black border border-brand-gold px-4 py-2 rounded">
+    <div 
+      role="alert" 
+      aria-live="polite" 
+      className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-brand-black border border-brand-gold px-4 py-2 rounded"
+    >
       {message}
     </div>
   )

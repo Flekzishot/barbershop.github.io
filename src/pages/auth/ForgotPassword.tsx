@@ -10,8 +10,8 @@ export default function ForgotPassword() {
     try {
       await api.post('/auth/forgot-password', { email })
       toast('Email envoyé si le compte existe')
-    } catch (e: any) {
-      toast(e?.response?.data?.message || 'Erreur')
+    } catch (error) {
+      const axiosError = error as { response?: { data?: { message?: string } } }; toast(axiosError?.response?.data?.message || 'Erreur')
     }
   }
 

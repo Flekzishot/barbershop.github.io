@@ -16,8 +16,8 @@ export default function Login() {
       const { data } = await api.post('/auth/login', { email, password })
       setSession(data.token, data.user.role)
       toast('Connexion réussie')
-    } catch (e: any) {
-      toast(e?.response?.data?.message || 'Erreur de connexion')
+    } catch (error) {
+      const axiosError = error as { response?: { data?: { message?: string } } }; toast(axiosError?.response?.data?.message || 'Erreur de connexion')
     } finally {
       setLoading(false)
     }

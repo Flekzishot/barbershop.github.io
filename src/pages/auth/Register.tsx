@@ -14,8 +14,8 @@ export default function Register() {
     try {
       await api.post('/auth/register', { role, name, email, phone, password })
       toast('Inscription réussie — veuillez vérifier votre email')
-    } catch (e: any) {
-      toast(e?.response?.data?.message || 'Erreur lors de l’inscription')
+    } catch (error) {
+      const axiosError = error as { response?: { data?: { message?: string } } }; toast(axiosError?.response?.data?.message || 'Erreur lors de l’inscription')
     }
   }
 
@@ -23,7 +23,7 @@ export default function Register() {
     <section className="mx-auto max-w-md px-4 py-10">
       <h2 className="text-2xl font-bold mb-4">Inscription</h2>
       <form onSubmit={onSubmit} className="space-y-4">
-        <select className="w-full bg-transparent border border-brand-gold/30 rounded p-2" value={role} onChange={(e) => setRole(e.target.value as any)}>
+        <select className="w-full bg-transparent border border-brand-gold/30 rounded p-2" value={role} onChange={(e) => setRole(e.target.value as 'client' | 'barber')}>
           <option value="client">Client</option>
           <option value="barber">Coiffeur/Barbier</option>
         </select>
